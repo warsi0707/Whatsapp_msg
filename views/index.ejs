@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>All chats</h2> 
+    <form action="/chats/new" method="get">
+        <button>Add chat</button>
+    </form> <hr>
+    <% for( let chat of chats ) { %>
+        <div class="chat">
+            <p>From : <%= chat.from %></p>
+            <div class="msg">
+                <p><%= chat.msg %></p>
+                <form action="/chats/<%= chat._id %>/edit">
+                    <button>edit</button>
+                </form> <br>
+                <form method="post"  action="/chats/<%= chat._id %>?_method=DELETE" >
+                    <Button>Delete</Button>
+                </form>
+            </div>
+  
+            <p>Received by : <%= chat.to %></p> 
+            <!-- CONVERTED INTO STRING AND THEN SPLIT INTO PEACES FROM THE EACH SPACE AND CALL INDEXING FROM 4TH INDEX -->
+            <p><%= chat.created_at.toString().split(" ")[4] %></p> 
+            <!-- CONVERTED INTO STRING AND THEN SPLIT INTO PEACES FROM THE EACH SPACE AND SPLICE FROM 0 TO 4TH INDEX -->
+            <p><%= chat.created_at.toString().split(" ").slice(0, 4).join("-") %></p>
+        </div> <br> <br>
+     
+        
+    
+    <% } %>
+    
+</body>
+</html>
